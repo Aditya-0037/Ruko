@@ -1,0 +1,210 @@
+/* ---------- The call ---------- */
+.callCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-2);
+}
+
+/* The biggest thing on the screen, reachable with one thumb. */
+.callCard .callButton {
+  min-height: max(4.5rem, 72px);
+  font-size: var(--fs-xl);
+  border-radius: var(--radius-lg);
+}
+
+.callExplain {
+  font-weight: 650;
+}
+
+/* What to say: a calm quote, so she does not have to find words while scared. */
+.say {
+  padding: var(--space-2) var(--space-3);
+  border-inline-start: 4px solid var(--color-border-strong);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+}
+
+.called {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.called svg {
+  flex-shrink: 0;
+  width: 1.3em;
+  height: 1.3em;
+  margin-top: 0.1em;
+}
+
+.callLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+/* ---------- Five steps ---------- */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.stepsHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+}
+
+.progressText {
+  font-weight: 750;
+  color: var(--color-primary);
+}
+
+.progressBar {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.segment {
+  flex: 1;
+  height: 0.6rem;
+  border-radius: var(--radius-pill);
+  border: var(--border-width) solid var(--color-border-strong);
+  background: var(--color-surface);
+  transition: background-color var(--dur-med) var(--ease-standard);
+}
+
+.segmentDone {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+  transition:
+    background-color var(--dur-med) var(--ease-standard),
+    border-color var(--dur-med) var(--ease-standard);
+}
+
+.stepDone {
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+  box-shadow: none;
+}
+
+.stepKicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 750;
+}
+
+.doneBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-success);
+}
+
+.doneBadge svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.stepLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: var(--target-min);
+  cursor: pointer;
+}
+
+.stepTitle {
+  padding-top: 0.2rem;
+  font-size: var(--fs-lg);
+  font-weight: 750;
+  line-height: var(--lh-tight);
+}
+
+:root[lang='hi'] .stepTitle {
+  line-height: 1.45;
+}
+
+.stepBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.stepExtra {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.stepLink {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+/* The live region is always there (so it is announced when filled); empty, it takes no gap. */
+.allDone:empty {
+  margin-top: calc(-1 * var(--space-3));
+}
+
+/* ---------- Also helpful ---------- */
+.alsoTitle {
+  font-size: var(--fs-lg);
+}
+
+.reset {
+  align-self: center;
+}
+
+/* ---------- Large text (the step list is an em-sized container, see ui.module.css) ---------- */
+@container (max-width: 15em) {
+  .step {
+    padding-inline: var(--space-3);
+  }
+
+  .callCard .callButton {
+    font-size: var(--fs-lg);
+  }
+
+  .stepTitle {
+    font-size: var(--fs-md);
+  }
+}

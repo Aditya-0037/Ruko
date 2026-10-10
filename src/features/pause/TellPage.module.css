@@ -1,0 +1,173 @@
+.success:focus {
+  outline: none;
+}
+
+.success:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-md);
+}
+
+.sentAt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.sentAt svg {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.sendButton {
+  min-height: 4rem;
+}
+
+/* ---------- Sections ---------- */
+.section,
+.previewSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-size: var(--fs-lg);
+}
+
+/* ---------- Preview of the trusted person's phone ---------- */
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-4);
+  border: var(--control-border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-sunken);
+}
+
+.previewCaption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.previewCaption svg {
+  flex-shrink: 0;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.notifApp {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.notifMark {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex-shrink: 0;
+}
+
+.notifTitle {
+  font-size: var(--fs-lg);
+  font-weight: 750;
+}
+
+.notifActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+/* Mock buttons on the other phone: clearly drawn, not tappable here. */
+.notifChip {
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+/* ---------- What happens next / what is shared ---------- */
+.steps,
+.shared {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.steps li,
+.shared li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.stepIcon,
+.sharedIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  border: var(--border-width) solid var(--color-primary-soft-border);
+  color: var(--color-primary);
+}
+
+.stepIcon svg,
+.sharedIcon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* ---------- Next actions ---------- */
+.nextList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ---------- Large text ---------- */
+.steps li > span:last-child,
+.shared li > span:last-child,
+.sentAt > span,
+.previewCaption > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+button.sendButton,
+.nextList > a,
+.nextList > button {
+  border-radius: var(--radius-lg);
+}

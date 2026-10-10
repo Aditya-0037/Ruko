@@ -1,0 +1,315 @@
+/* =========================================================
+   The frame: "this is a simulated third-party app"
+   ========================================================= */
+
+.frame {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: var(--control-border-width) dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-sunken);
+}
+
+.frameBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-inline: var(--space-1);
+}
+
+.frameTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-md);
+  font-weight: 750;
+  color: var(--color-text);
+}
+
+.frameTitle svg,
+.badge svg,
+.alongside svg,
+.tag svg {
+  flex-shrink: 0;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: var(--border-width) solid var(--color-border-strong);
+  background: var(--color-surface);
+  font-size: var(--fs-sm);
+  font-weight: 750;
+}
+
+/* ---------- The pretend app itself: plain, neutral, not Ruko's teal ---------- */
+.app {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.appHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-text);
+  color: var(--color-surface);
+}
+
+.appLogo {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.appLogo svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.appHeaderText {
+  min-width: 0;
+}
+
+.appName {
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.appSub {
+  font-size: var(--fs-sm);
+  opacity: 0.9;
+}
+
+:root[data-contrast='high'] .appSub {
+  opacity: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+/* ---------- Payee ---------- */
+.payee {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.payLabel {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.payeeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: var(--border-width) solid var(--color-border-strong);
+  background: var(--color-surface-sunken);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.payeeText {
+  min-width: 0;
+}
+
+.payeeName {
+  font-size: var(--fs-lg);
+  font-weight: 750;
+  line-height: var(--lh-tight);
+  overflow-wrap: anywhere;
+}
+
+.account {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.tag {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--color-border);
+  font-size: var(--fs-sm);
+}
+
+.tag svg {
+  margin-top: 0.2em;
+}
+
+.tag > span {
+  min-width: 0;
+}
+
+.tagNew {
+  background: var(--color-caution-bg);
+  border-color: var(--color-accent);
+}
+
+.tagNew svg {
+  color: var(--color-caution-text);
+}
+
+.tagSaved {
+  background: var(--color-surface-sunken);
+}
+
+/* ---------- Amount ---------- */
+.amount {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.amountInput {
+  font-size: var(--fs-xl);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.words {
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  color: var(--color-text-muted);
+}
+
+/* The pretend app's own button: dark and square-ish, so it reads as "their" app, not Ruko. */
+.form .sendButton {
+  --btn-bg: var(--color-text);
+  --btn-fg: var(--color-surface);
+  --btn-border: var(--color-text);
+  --btn-bg-hover: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+}
+
+.fineprint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ---------- Receipt (no rule applied) ---------- */
+.receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+}
+
+.receiptIcon {
+  color: var(--color-success);
+}
+
+.receiptIcon svg {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.receiptTitle {
+  font-size: var(--fs-xl);
+}
+
+.receiptTitle:focus {
+  outline: none;
+}
+
+.receiptTitle:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.receiptTo {
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   Around the frame: Ruko's own layer
+   ========================================================= */
+
+.alongside {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-text);
+}
+
+.alongside svg {
+  margin-top: 0.2em;
+  color: var(--color-primary);
+}
+
+.alongside > span {
+  min-width: 0;
+}
+
+.calloutAction {
+  margin-top: var(--space-2);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.try {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  font-size: var(--fs-lg);
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.quick > button {
+  flex: 1 1 auto;
+}

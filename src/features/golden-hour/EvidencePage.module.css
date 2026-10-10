@@ -1,0 +1,52 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.group {
+  gap: var(--space-5);
+}
+
+.groupTitle {
+  font-size: var(--fs-xl);
+}
+
+/* "That is ₹2,00,000 — 2 lakh rupees": a second way to check the digits. */
+.preview {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* IDs and phone numbers: even-width digits, a little air, easy to read out to 1930. */
+.mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.suggest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.keep {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.keepList {
+  /* An em-sized container: see the large-text rules in ui.module.css. */
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}

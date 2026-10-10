@@ -24,13 +24,15 @@ interface CalloutProps {
 /** Message box. Meaning is carried by icon + words, never colour alone. */
 export function Callout({ tone = 'info', title, icon, children, role, className }: CalloutProps) {
   return (
-    <div className={[styles.callout, styles[tone], className].filter(Boolean).join(' ')} role={role}>
-      <span className={styles.icon} aria-hidden="true">
-        {icon ?? defaultIcons[tone]}
-      </span>
-      <div className={styles.content}>
-        {title && <p className={styles.title}>{title}</p>}
-        {children && <div>{children}</div>}
+    <div className={styles.wrap}>
+      <div className={[styles.callout, styles[tone], className].filter(Boolean).join(' ')} role={role}>
+        <span className={styles.icon} aria-hidden="true">
+          {icon ?? defaultIcons[tone]}
+        </span>
+        <div className={styles.content}>
+          {title && <p className={styles.title}>{title}</p>}
+          {children && <div>{children}</div>}
+        </div>
       </div>
     </div>
   )

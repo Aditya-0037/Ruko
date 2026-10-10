@@ -1,0 +1,94 @@
+.svg {
+  width: min(100%, 15rem);
+  height: auto;
+  margin: 0 auto;
+}
+
+.phone {
+  fill: var(--color-surface);
+  stroke: var(--color-text);
+  stroke-width: 4;
+}
+
+.screen {
+  fill: var(--color-primary-soft);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.detail {
+  fill: var(--color-border-strong);
+}
+
+.frame {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+}
+
+.emblem {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+}
+
+.liveDot {
+  fill: var(--color-text-muted);
+}
+
+.uniform {
+  fill: var(--color-text-muted);
+}
+
+.collar {
+  fill: var(--color-surface);
+}
+
+.badge {
+  fill: var(--color-accent);
+  stroke: var(--color-text);
+  stroke-width: 1;
+}
+
+.skin {
+  fill: var(--color-highlight);
+  stroke: var(--color-text);
+  stroke-width: 1.5;
+}
+
+.cap {
+  fill: var(--color-text);
+}
+
+.ink {
+  fill: var(--color-text);
+}
+
+.line {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.bubble {
+  fill: var(--color-surface);
+  stroke: var(--color-border-strong);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.bubbleLine {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.callButton {
+  fill: var(--color-text-muted);
+}
+
+.callButtonPrimary {
+  fill: var(--color-primary);
+}

@@ -1,0 +1,86 @@
+/*
+ * A slim, dark bar that visually echoes the call screen (inverse surface: paper on ink).
+ * It is in normal flow — not sticky — so it never overlaps the sticky top bar or hides focus.
+ */
+.pip {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-bottom: var(--border-width) solid var(--color-border);
+  /* Blue focus ring is too dark on ink; marigold stays visible. */
+  --color-focus: var(--color-highlight);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-4);
+}
+
+.text {
+  font-size: var(--fs-sm);
+}
+
+.icon {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-inline-end: var(--space-1);
+  vertical-align: -0.2em;
+  color: var(--color-highlight);
+}
+
+.status {
+  font-weight: 750;
+}
+
+.time {
+  font-variant-numeric: tabular-nums;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.actions .btn {
+  flex: 1 1 auto;
+  border-radius: var(--radius-lg);
+  min-height: var(--target-min);
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--fs-sm);
+  box-shadow: none;
+}
+
+.actions .return {
+  --btn-bg: var(--color-highlight);
+  --btn-fg: var(--color-on-highlight);
+  --btn-border: var(--color-highlight);
+  --btn-bg-hover: var(--color-accent);
+}
+
+.actions .end {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-bg);
+  --btn-border: var(--color-bg);
+  --btn-bg-hover: color-mix(in srgb, var(--color-bg) 16%, transparent);
+}
+
+/* On wider screens the actions sit beside the text. */
+@media (min-width: 40rem) {
+  .inner {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .text {
+    flex: 1;
+  }
+
+  .actions {
+    flex-wrap: nowrap;
+  }
+}

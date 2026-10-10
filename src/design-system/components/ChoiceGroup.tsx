@@ -1,4 +1,5 @@
 import { useId, type ReactNode } from 'react'
+import { CircleAlert } from 'lucide-react'
 import styles from './ChoiceGroup.module.css'
 
 export interface Choice<V extends string> {
@@ -6,6 +7,8 @@ export interface Choice<V extends string> {
   label: string
   description?: string
   icon?: ReactNode
+  /** Language of this option's label when it differs from the page, e.g. 'hi' for "हिंदी". */
+  lang?: string
 }
 
 interface ChoiceGroupProps<V extends string> {
@@ -19,6 +22,8 @@ interface ChoiceGroupProps<V extends string> {
   /** Visually hide the legend when the page heading already asks the question. */
   hideLegend?: boolean
   name?: string
+  /** Say what is missing and how to fix it. Linked to the group with aria-describedby. */
+  error?: string
 }
 
 /** Big radio cards built on native radios: arrow keys, labels and screen readers just work. */
@@ -31,16 +36,25 @@ export function ChoiceGroup<V extends string>({
   layout = 'column',
   hideLegend,
   name,
+  error,
 }: ChoiceGroupProps<V>) {
   const autoName = useId()
   const hintId = useId()
+  const errorId = useId()
   const groupName = name ?? autoName
+  const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(' ') || undefined
   return (
-    <fieldset className={styles.fieldset} aria-describedby={hint ? hintId : undefined}>
+    <fieldset className={styles.fieldset} aria-describedby={describedBy}>
       <legend className={hideLegend ? 'visually-hidden' : styles.legend}>{legend}</legend>
       {hint && (
         <p id={hintId} className={styles.hint}>
           {hint}
+        </p>
+      )}
+      {error && (
+        <p id={errorId} className={styles.error}>
+          <CircleAlert aria-hidden="true" />
+          <span>{error}</span>
         </p>
       )}
       <div className={[styles.options, layout === 'row' && styles.row].filter(Boolean).join(' ')}>
@@ -60,7 +74,7 @@ export function ChoiceGroup<V extends string>({
                 {o.icon}
               </span>
             )}
-            <span className={styles.text}>
+            <span className={styles.text} lang={o.lang}>
               <span className={styles.label}>{o.label}</span>
               {o.description && <span className={styles.description}>{o.description}</span>}
             </span>

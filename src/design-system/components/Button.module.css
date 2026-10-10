@@ -10,9 +10,10 @@
   gap: var(--space-2);
   min-height: max(var(--target-min), 3rem);
   min-width: var(--target-min);
-  padding: var(--space-2) var(--space-5);
+  padding: var(--space-2) min(var(--space-5), 24px);
   border: var(--control-border-width) solid var(--btn-border);
-  border-radius: var(--radius-pill);
+  /* Half the one-line height: a pill on one line, a soft rectangle if a long label wraps at 200%. */
+  border-radius: max(24px, 1.5rem);
   background: var(--btn-bg);
   color: var(--btn-fg);
   font-size: var(--fs-md);
@@ -85,7 +86,8 @@
 
 .lg {
   min-height: max(56px, 3.5rem);
-  padding: var(--space-3) var(--space-6);
+  padding: var(--space-3) min(var(--space-6), 28px);
+  border-radius: max(28px, 1.75rem);
   font-size: var(--fs-lg);
 }
 

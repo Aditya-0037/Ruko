@@ -1,0 +1,492 @@
+/*
+ * The practice call is an "inverse" surface, dark like a real video call. Only alias tokens are
+ * used: text and background simply swap (ink on paper → paper on ink; in high contrast, white on
+ * black). Measured: paper on ink-900 16.4:1, marigold-300 on ink-900 11.7:1.
+ */
+.call {
+  background: var(--color-text);
+  color: var(--color-bg);
+  /* The blue focus ring is too dark on this surface; marigold keeps focus clearly visible. */
+  --color-focus: var(--color-highlight);
+}
+
+/* ---------- Demo strip (always visible) ---------- */
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+}
+
+.badge {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+}
+
+.badge svg {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+
+.call > main {
+  padding-block: var(--space-4);
+}
+
+/* Light-on-dark outline buttons (End demo, Hang up, transcript toggle). */
+.call .ghost {
+  border-radius: var(--radius-lg);
+  --btn-bg: transparent;
+  --btn-fg: var(--color-bg);
+  --btn-border: var(--color-bg);
+  --btn-bg-hover: color-mix(in srgb, var(--color-bg) 16%, transparent);
+  box-shadow: none;
+}
+
+/* Smaller than a default button, still well over the 48px target. */
+.call .compact {
+  min-height: var(--target-min);
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--fs-sm);
+}
+
+/* Design notes keep their own light card, so give them dark text back. */
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  color: var(--color-text);
+  text-align: start;
+}
+
+.notes:empty {
+  display: none;
+}
+
+/* ---------- Ringing ---------- */
+.ringing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.avatarWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(10rem, 46vw);
+  aspect-ratio: 1;
+  margin: var(--space-4) 0 var(--space-3);
+}
+
+.avatar {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 4px var(--color-bg);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid var(--color-highlight);
+  opacity: 0;
+}
+
+/* Gentle pulses that stop by themselves within 5 seconds (WCAG 2.2.2); none under reduced motion. */
+.animate .ring {
+  animation: ring calc(var(--dur-slow) * 3.5) var(--ease-standard) 3 both;
+}
+
+.animate .ring + .ring {
+  animation-delay: calc(var(--dur-slow) * 1.2);
+}
+
+.animate .statusIcon {
+  animation: shake calc(var(--dur-slow) * 2) var(--ease-standard) 5;
+}
+
+@keyframes ring {
+  from {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%,
+  75%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(-14deg);
+  }
+
+  30% {
+    transform: rotate(12deg);
+  }
+
+  45% {
+    transform: rotate(-10deg);
+  }
+
+  60% {
+    transform: rotate(8deg);
+  }
+}
+
+.callerName {
+  font-size: var(--fs-xl);
+}
+
+.agency {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.statusIcon {
+  display: inline-flex;
+}
+
+.statusIcon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.warning {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-width) solid var(--color-highlight);
+  border-radius: var(--radius-lg);
+  color: var(--color-highlight);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.warning svg {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+
+.practiceNote {
+  max-width: 28ch;
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+}
+
+.answerRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+  gap: var(--space-4);
+  width: 100%;
+  margin-top: auto;
+  padding-top: var(--space-5);
+}
+
+.answerRow .answer {
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: 5rem;
+  border-radius: var(--radius-lg);
+  border-color: var(--color-bg);
+  font-size: var(--fs-lg);
+}
+
+.answerRow .answer svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Declining is the safe choice, so it is calm and light — never red. */
+.answerRow .decline {
+  --btn-bg: var(--color-bg);
+  --btn-fg: var(--color-text);
+  --btn-border: var(--color-bg);
+  --btn-bg-hover: var(--color-surface-sunken);
+}
+
+/* ---------- Connected ---------- */
+.connected {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--border-width) solid color-mix(in srgb, var(--color-bg) 35%, var(--color-text));
+  border-radius: var(--radius-lg);
+  background: var(--color-text);
+}
+
+.tileHeader {
+  padding: var(--space-3) var(--space-4);
+}
+
+.tileMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-3);
+}
+
+.tileName {
+  font-size: var(--fs-lg);
+}
+
+.tileName:focus {
+  outline: none;
+}
+
+.tileAgency {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.timer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-md);
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  color: var(--color-highlight);
+}
+
+.video {
+  position: relative;
+  aspect-ratio: 16 / 10;
+}
+
+.self {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 26%;
+  aspect-ratio: 3 / 4;
+  border: 2px solid var(--color-bg);
+  border-radius: var(--radius-md);
+  background: var(--color-text-muted);
+  color: var(--color-bg);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.self svg {
+  width: 45%;
+  height: auto;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  /* Reserve room so lines of different length do not make the page jump. */
+  min-height: 7.5rem;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-top: var(--border-width) solid color-mix(in srgb, var(--color-bg) 35%, var(--color-text));
+}
+
+.captionLabel {
+  color: var(--color-highlight);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.captionText {
+  font-size: var(--fs-lg);
+  font-weight: 650;
+}
+
+.captionAnimate {
+  animation: caption-in var(--dur-slow) var(--ease-standard);
+}
+
+@keyframes caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.controls > * {
+  flex: 1 1 auto;
+}
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-width) solid color-mix(in srgb, var(--color-bg) 35%, var(--color-text));
+  border-radius: var(--radius-md);
+}
+
+.transcript[hidden] {
+  display: none;
+}
+
+.transcriptTitle {
+  font-size: var(--fs-lg);
+}
+
+.lines {
+  padding-inline-start: 1.5em;
+}
+
+.lineItem + .lineItem {
+  margin-top: var(--space-4);
+}
+
+.lineItem::marker {
+  color: var(--color-highlight);
+  font-weight: 800;
+}
+
+.lineText {
+  display: block;
+  font-weight: 650;
+}
+
+.sign {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--color-highlight);
+  font-size: var(--fs-sm);
+}
+
+.sign svg {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+  margin-top: 0.2em;
+}
+
+/* The Ruko button floats at thumb reach while the rest of the call scrolls beneath it. */
+.dock {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding: var(--space-3) 0 max(var(--space-2), env(safe-area-inset-bottom));
+  background: var(--color-text);
+}
+
+.dock .ruko {
+  border-radius: var(--radius-lg);
+  min-height: 4.5rem;
+  padding-inline: var(--space-4);
+  box-shadow: 0 0 0 4px var(--color-highlight);
+}
+
+/* Two-tier label like the home Ruko button: the word itself, then what it does. */
+.rukoTitle {
+  display: block;
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+}
+
+.rukoSub {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 650;
+}
+
+.dock .ruko:focus-visible {
+  outline-offset: 8px;
+}
+
+.dock .ruko svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.dockHint {
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+/* ---------- Reduced motion: belt and braces (the component also drops the classes) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) .animate .ring,
+  :root:not([data-motion='full']) .animate .statusIcon,
+  :root:not([data-motion='full']) .captionAnimate {
+    animation: none;
+  }
+}
+
+:root[data-motion='reduce'] .animate .ring,
+:root[data-motion='reduce'] .animate .statusIcon,
+:root[data-motion='reduce'] .captionAnimate {
+  animation: none;
+}
+
+/* ---------- Large text: long words wrap instead of overflowing ---------- */
+.warning > span,
+.status > span:last-child,
+.sign > span,
+.tileName,
+.tileAgency {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,113 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--fs-lg);
+}
+
+.stage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  padding: var(--space-3) 0;
+}
+
+.circle {
+  /* Content timing, not UI motion: 4 s in + 4 s out is the breathing exercise itself. */
+  --breath-cycle: 8s;
+
+  display: grid;
+  place-items: center;
+  width: min(9rem, 50vw);
+  aspect-ratio: 1;
+  padding: var(--space-3);
+  border: var(--control-border-width) solid var(--color-primary);
+  border-radius: 50%;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 750;
+  box-shadow: 0 0 0 10px var(--color-primary-soft);
+}
+
+/* Both labels share one grid cell; only one is visible at a time. */
+.circle > span {
+  grid-area: 1 / 1;
+}
+
+.animate {
+  animation: breathe var(--breath-cycle) var(--ease-standard) infinite;
+}
+
+.animate .in {
+  animation: show-first var(--breath-cycle) step-end infinite;
+}
+
+.animate .out {
+  animation: show-second var(--breath-cycle) step-end infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.7);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes show-first {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes show-second {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.help {
+  max-width: 32ch;
+}
+
+.toggle {
+  min-height: var(--target-min);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) .animate,
+  :root:not([data-motion='full']) .animate .in,
+  :root:not([data-motion='full']) .animate .out {
+    animation: none;
+  }
+}
+
+:root[data-motion='reduce'] .animate,
+:root[data-motion='reduce'] .animate .in,
+:root[data-motion='reduce'] .animate .out {
+  animation: none;
+}
+
+button.toggle {
+  border-radius: var(--radius-lg);
+}

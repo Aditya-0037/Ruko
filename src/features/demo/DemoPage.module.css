@@ -1,0 +1,275 @@
+/* The demo stage is the one wide page: two phones need room. */
+.demo main {
+  max-width: 92rem;
+}
+
+.stage {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 72rem) {
+  .stage {
+    grid-template-columns: minmax(18rem, 26rem) minmax(0, 1fr);
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.blockTitle {
+  font-size: var(--fs-lg);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ---------- Live readout ---------- */
+.status {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.statusRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-2) var(--space-4);
+}
+
+.statusRow + .statusRow {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.statusRow dt {
+  color: var(--color-text-muted);
+  font-weight: 650;
+}
+
+.statusRow dd {
+  margin: 0;
+  font-weight: 750;
+  text-align: end;
+}
+
+/* ---------- Script ---------- */
+.script {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.script li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.script li > span:last-child {
+  min-width: 0;
+  padding-top: 0.15em;
+}
+
+.scriptNum {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+}
+
+/* =========================================================
+   Phones
+   ========================================================= */
+
+.phones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.hint {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.phoneRow {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: center;
+}
+
+@media (min-width: 52rem) {
+  .phoneRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.phone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  margin: 0;
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.initial {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.kamla {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.rahul {
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+  border: var(--border-width) solid var(--color-accent);
+}
+
+.captionText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.who {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+}
+
+.roleLine {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* The bezel. Sized in px on purpose: the app inside is a 360-ish px phone, whatever the text size here. */
+.device {
+  width: min(100%, 384px);
+  padding: 12px;
+  border-radius: 52px;
+  background: var(--color-text);
+  box-shadow: var(--shadow-2);
+}
+
+:root[data-contrast='high'] .device {
+  box-shadow: none;
+}
+
+.screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 40px;
+  background: var(--color-bg);
+}
+
+.statusBar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 34px;
+  padding: 6px 22px 2px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.clock {
+  justify-self: start;
+  max-width: 100%;
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.notch {
+  width: 92px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background: var(--color-text);
+}
+
+.icons {
+  justify-self: end;
+  display: flex;
+  gap: 4px;
+}
+
+.icons svg {
+  width: 15px;
+  height: 15px;
+}
+
+.frame {
+  display: block;
+  width: 100%;
+  height: min(720px, 82vh);
+  border: 0;
+  background: var(--color-bg);
+}
+
+.homeBar {
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  width: 112px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--color-text);
+  opacity: 0.35;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+:root[data-contrast='high'] .homeBar {
+  opacity: 1;
+}

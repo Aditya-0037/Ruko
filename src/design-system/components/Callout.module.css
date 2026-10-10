@@ -1,3 +1,7 @@
+.wrap {
+  container-type: inline-size;
+}
+
 .callout {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -66,4 +70,12 @@
 
 .success .icon {
   color: var(--color-success);
+}
+
+@container (max-width: 17em) {
+  .callout {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-3);
+  }
 }

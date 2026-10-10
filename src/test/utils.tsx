@@ -21,9 +21,13 @@ export function withDemoProfile() {
  * Fails with a readable list of axe violations. Colour contrast is checked separately
  * (tokens.test.ts and Playwright), because jsdom cannot compute styles.
  */
-export async function expectNoAxeViolations(container: Element = document.body) {
+export async function expectNoAxeViolations(
+  container: Element = document.body,
+  opts: { iframes?: boolean } = {},
+) {
   const results = await axe.run(container, {
     rules: { 'color-contrast': { enabled: false } },
+    iframes: opts.iframes ?? true,
   })
   const summary = results.violations.map(
     (v) => `${v.id} (${v.impact}): ${v.help} → ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`,

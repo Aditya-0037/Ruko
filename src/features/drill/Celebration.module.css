@@ -1,0 +1,104 @@
+.wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 9rem;
+  /* Confetti never makes the page wider, even at 200% text. */
+  overflow: hidden;
+}
+
+.badge {
+  position: relative;
+  width: 7rem;
+  height: 7rem;
+  animation: pop calc(var(--dur-slow) * 1.4) var(--ease-spring) both;
+}
+
+.halo {
+  fill: var(--color-success-soft);
+  stroke: var(--color-success);
+  stroke-width: 2;
+}
+
+.disc {
+  fill: var(--color-success);
+}
+
+.tick {
+  fill: none;
+  stroke: var(--color-on-primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw calc(var(--dur-slow) * 1.2) var(--ease-standard) var(--dur-slow) forwards;
+}
+
+.piece {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  background: var(--color-accent);
+  transform: rotate(var(--r));
+  animation: settle calc(var(--dur-slow) * 2) var(--ease-spring) calc(var(--dur-fast) * var(--i)) both;
+}
+
+.piece[data-tone='b'] {
+  background: var(--color-primary);
+}
+
+.piece[data-tone='c'] {
+  background: var(--color-highlight);
+  border: 1px solid var(--color-caution-text);
+}
+
+.piece[data-tone='d'] {
+  background: var(--color-success);
+  border-radius: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: translateY(-1.5rem) rotate(0deg) scale(0.4);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotate(var(--r));
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: the final frame, fully static. */
+.still .badge,
+.still .piece {
+  animation: none;
+}
+
+.still .tick {
+  animation: none;
+  stroke-dashoffset: 0;
+}

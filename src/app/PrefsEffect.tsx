@@ -11,6 +11,7 @@ export function PrefsEffect() {
     root.dataset.easyRead = String(prefs.easyRead)
     root.dataset.motion = prefs.motion
     root.style.setProperty('--text-scale', String(prefs.textScale))
+    root.dataset.textLarge = String(prefs.textScale >= 1.5)
   }, [prefs])
   return null
 }

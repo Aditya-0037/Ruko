@@ -1,0 +1,183 @@
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.praise {
+  border-radius: var(--radius-md);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.heading {
+  font-size: var(--fs-xl);
+  hyphens: auto;
+}
+
+.heading:focus {
+  outline: none;
+}
+
+.heading:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+}
+
+.doneHeading {
+  text-align: center;
+}
+
+.prev {
+  align-self: flex-start;
+}
+
+.listen:empty {
+  display: none;
+}
+
+.listen {
+  margin-top: calc(var(--space-3) * -1);
+}
+
+/* ---------- Step 1: the imagined call ---------- */
+.scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-sunken);
+  border: var(--border-width) dashed var(--color-border-strong);
+}
+
+.practiceTag {
+  /* In normal flow (not overlaid), so it never covers the drawing at 200% text. */
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+  border: var(--border-width) solid var(--color-caution-text);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.practiceTag svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+
+/* ---------- Step 3: code word ---------- */
+.codeCard {
+  align-items: flex-start;
+}
+
+.codeReveal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.codeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.codeLabel svg {
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+}
+
+.codeWord {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: var(--control-border-width) dashed var(--color-primary);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Step 4: the trusted person ---------- */
+.personRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.personText {
+  flex: 1 1 8rem;
+  min-width: 0;
+}
+
+.personName {
+  font-size: var(--fs-lg);
+  font-weight: 750;
+}
+
+/* ---------- Step 5: done ---------- */
+.doneBody {
+  font-size: var(--fs-lg);
+  text-align: center;
+  font-weight: 600;
+}
+
+.doneActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.demoHint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.demoTag {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+  font-weight: 800;
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

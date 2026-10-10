@@ -318,7 +318,7 @@ export const useStore = create<RukoState>()(
         set((s) => {
           const t = s.incident.transfer
           const transfer =
-            t && t.status === 'paused'
+            t && (t.status === 'paused' || (t.status === 'approved' && decision === 'block'))
               ? { ...t, status: decision === 'approve' ? ('approved' as const) : decision === 'block' ? ('blocked' as const) : t.status }
               : t
           return {

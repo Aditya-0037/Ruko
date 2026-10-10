@@ -1,0 +1,83 @@
+/* "Step 1 of 3" sits above the question visually, like a caption (GOV.UK question pages).
+   It has nothing focusable, so moving it does not change the focus order. */
+.progress {
+  order: -1;
+  margin-bottom: calc(var(--space-2) * -1);
+}
+
+/* ---------- Why we ask ---------- */
+.why {
+  container: why / inline-size;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-primary-soft-border);
+}
+
+.whyIcon {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--color-primary);
+}
+
+.whyLabel {
+  font-size: var(--fs-sm);
+  font-weight: 750;
+  color: var(--color-text-muted);
+}
+
+.whyBody {
+  grid-column: 2;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Large text (about 130% and up on a phone): the explanation uses the full width. */
+@container why (max-width: 14em) {
+  .whyBody {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Answers ---------- */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: padding var(--dur-fast) var(--ease-standard);
+}
+
+/* Error state: a thick edge beside the answers plus words and an icon (never colour alone). */
+.invalid {
+  padding-inline-start: var(--space-3);
+  border-inline-start: calc(var(--control-border-width) * 2) solid var(--color-danger);
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-danger);
+  font-weight: 700;
+}
+
+.error svg {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.15em;
+}
+
+.error span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* A wrapped label at 200% text turns a pill into an oval; a large radius stays calm. */
+button.continue {
+  border-radius: var(--radius-lg);
+}

@@ -1,0 +1,392 @@
+/*
+ * Result page. Calm frame (teal tint from Screen tone="calm"), one coloured verdict block, then
+ * teal next steps. Layout reflows with container queries measured in em, so it adapts to the
+ * text-size setting as well as the screen: on a 360px phone the content column is ~18em at 100%,
+ * ~13em at 130% and ~8em at 200%.
+ */
+
+/* ---------- Verdict medallion (decorative; sits above the h1 via order) ---------- */
+.medallion {
+  order: -1;
+  align-self: flex-start;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: var(--space-3) 0 calc(var(--space-2) * -1) var(--space-3);
+  border-radius: 50%;
+  border: var(--control-border-width) solid currentColor;
+  background: var(--color-surface);
+}
+
+.medallion svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.scam .medallion {
+  color: var(--color-danger);
+  box-shadow: 0 0 0 0.6rem var(--color-danger-soft);
+}
+
+.unsure .medallion {
+  color: var(--color-caution-text);
+  box-shadow: 0 0 0 0.6rem var(--color-caution-bg);
+}
+
+.clear .medallion {
+  color: var(--color-success);
+  box-shadow: 0 0 0 0.6rem var(--color-success-soft);
+}
+
+:root[data-contrast='high'] .medallion {
+  box-shadow: none;
+  border-width: var(--control-border-width);
+}
+
+/* One gentle settle-in, only when motion is allowed (class removed by useReducedMotion). */
+.animate {
+  animation: medallion-in var(--dur-slow) var(--ease-spring) both;
+}
+
+@keyframes medallion-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+/* ---------- Content column ---------- */
+.column {
+  container: result / inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Never blame: checking was the right move, whatever the result. Tucked up under the h1. */
+.reassure {
+  margin-top: calc(var(--space-2) - var(--space-5)); /* main gap is --space-5 */
+  font-size: var(--fs-lg);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.column > .reassure + * {
+  margin-top: calc(var(--space-2) * -1);
+}
+
+.sectionTitle {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-tight);
+}
+
+/* ---------- Why (the verdict callout) ---------- */
+.verdictWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.why {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.reason {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.reasonIcon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+}
+
+.reasonIcon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.scam .reasonIcon {
+  color: var(--color-danger);
+}
+
+.unsure .reasonIcon {
+  color: var(--color-caution-text);
+}
+
+.clear .reasonIcon {
+  color: var(--color-primary);
+}
+
+.reason[data-kind='missing'] .reasonIcon {
+  color: var(--color-text-muted);
+  border-style: dashed;
+}
+
+.mark {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.reasonText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  /* Centres the first line on the 2.5rem icon tile. */
+  padding-top: 0.45em;
+  overflow-wrap: anywhere;
+}
+
+.reasonLead {
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.reasonFact {
+  color: var(--color-text);
+}
+
+.listen {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ---------- What to do now ---------- */
+.next {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hangUp {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-soft);
+  border: var(--border-width) solid var(--color-primary-soft-border);
+}
+
+.hangUpIcon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.hangUpIcon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.hangUpText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.hangUpTitle {
+  font-size: var(--fs-lg);
+  font-weight: 750;
+  line-height: var(--lh-tight);
+}
+
+.told {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-weight: 650;
+}
+
+.told svg {
+  flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.15em;
+  color: var(--color-success);
+}
+
+.told span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hint {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  padding-inline: var(--space-2);
+}
+
+/* Pill buttons turn into ovals when a label wraps at 200% text; a large radius stays calm.
+   (Element + class so it reliably beats the shared pill radius.) */
+a.roundButton {
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- What real officers do ---------- */
+.facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.fact {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.fact svg {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1em;
+  color: var(--color-primary);
+}
+
+.fact span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.law {
+  padding-top: var(--space-3);
+  border-top: var(--border-width) solid var(--color-border);
+  font-weight: 700;
+}
+
+/* ---------- Your answers ---------- */
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.answerList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.answerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) var(--space-4);
+}
+
+.answerRow + .answerRow {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.answerTopic {
+  flex: 1 1 10em;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.answerValue {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 750;
+}
+
+.answerIcon {
+  display: inline-flex;
+}
+
+.answerIcon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.answerValue[data-answer='yes'] .answerIcon {
+  color: var(--color-danger);
+}
+
+.answerValue[data-answer='no'] .answerIcon {
+  color: var(--color-success);
+}
+
+.answerValue[data-answer='unsure'] .answerIcon {
+  color: var(--color-caution-text);
+}
+
+.answerValue[data-answer='none'] {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Large text (≥ about 130%): give words the full width ---------- */
+@container result (max-width: 14em) {
+  /* The callout's own icon moves above its content instead of taking a column. */
+  .verdictWrap .verdict {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .verdictWrap .verdict,
+  .column .officers {
+    padding: var(--space-4);
+  }
+}
+
+/* ---------- Very large text (≥ about 150%): icons sit above their words ---------- */
+@container result (max-width: 12em) {
+  .reason,
+  .hangUp,
+  .fact {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .reasonText {
+    padding-top: 0;
+  }
+
+  .fact svg {
+    margin-top: 0;
+  }
+}

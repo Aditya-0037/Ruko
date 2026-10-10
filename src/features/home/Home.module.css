@@ -1,0 +1,534 @@
+/* =========================================================
+   Welcome (not set up yet)
+   ========================================================= */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding-top: var(--space-2);
+}
+
+.heroMark {
+  display: grid;
+  place-items: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-primary-soft-border);
+  box-shadow:
+    0 0 0 10px var(--color-primary-soft),
+    var(--shadow-2);
+  animation: float calc(var(--dur-slow) * 14) var(--ease-standard) infinite;
+}
+
+:root[data-contrast='high'] .heroMark {
+  box-shadow: none;
+  border: var(--control-border-width) solid var(--color-border-strong);
+}
+
+.heroMarkSvg {
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* An endless animation cannot rely on shortened durations, so switch it off explicitly. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) .heroMark {
+    animation: none;
+  }
+}
+
+:root[data-motion='reduce'] .heroMark {
+  animation: none;
+}
+
+.wordmark {
+  margin-top: var(--space-3);
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.tagline {
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  color: var(--color-text-muted);
+}
+
+.promise {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: var(--control-border-width) solid var(--color-accent);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+  text-align: start;
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+:root[data-contrast='high'] .promise {
+  border-color: var(--color-border-strong);
+}
+
+.promiseText {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+
+/* A tiny copy of the real Ruko button, so the promise shows exactly what to look for. */
+.promiseButton {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow:
+    0 0 0 4px var(--color-primary-soft),
+    0 0 0 6px var(--color-primary-soft-border);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.hint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.how {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionTitle {
+  font-size: var(--fs-xl);
+}
+
+/* Before → During → After as a short vertical timeline. */
+.moments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.moment {
+  --moment-bg: var(--color-primary-soft);
+  --moment-fg: var(--color-primary);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+}
+
+.moment:last-child {
+  padding-bottom: 0;
+}
+
+/* Connector line between the icons. Decorative. */
+.moment:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(1.5rem - 1px);
+  top: 3rem;
+  bottom: 0;
+  border-inline-start: 2px dashed var(--color-border-strong);
+}
+
+.momentBefore {
+  --moment-bg: var(--color-primary-soft);
+  --moment-fg: var(--color-primary);
+}
+
+.momentDuring {
+  --moment-bg: var(--color-highlight);
+  --moment-fg: var(--color-on-highlight);
+}
+
+.momentAfter {
+  --moment-bg: var(--color-danger-soft);
+  --moment-fg: var(--color-danger);
+}
+
+.momentIcon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--moment-bg);
+  color: var(--moment-fg);
+  border: var(--border-width) solid var(--color-border);
+}
+
+:root[data-contrast='high'] .momentIcon {
+  border: var(--control-border-width) solid var(--color-border-strong);
+}
+
+.momentIcon svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.momentText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+  min-width: 0;
+}
+
+.momentTitle {
+  font-size: var(--fs-lg);
+}
+
+.privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.privacy svg {
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.2em;
+  color: var(--color-success);
+}
+
+.judges {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  margin-top: calc(var(--space-3) * -1);
+  padding: var(--space-1) var(--space-3) var(--space-1) 0;
+  border-radius: var(--radius-sm);
+  font-weight: 650;
+  font-size: var(--fs-sm);
+}
+
+.judges:hover {
+  background: var(--color-primary-soft);
+}
+
+.judges svg {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+/* =========================================================
+   Home once set up
+   ========================================================= */
+
+.status {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: calc(var(--space-3) * -1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-success-soft);
+  border: var(--border-width) solid var(--color-success);
+  color: var(--color-success);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.status svg {
+  flex-shrink: 0;
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.unfinished {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-caution-bg);
+  border: var(--border-width) solid var(--color-accent);
+  border-inline-start-width: 6px;
+}
+
+.unfinishedText {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  font-weight: 650;
+}
+
+.unfinishedText svg {
+  flex-shrink: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.1em;
+  color: var(--color-caution-text);
+}
+
+.rukoZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.reassure {
+  max-width: 30ch;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Two classes so this wins over the shared Card padding: more room for text on a 360px phone. */
+.timeline .momentCard {
+  gap: var(--space-4);
+  /* Side padding stops growing with text size, so large text keeps room to reflow. */
+  padding: var(--space-5) min(var(--space-4), 4vw);
+}
+
+.momentHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: var(--border-width) solid transparent;
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+:lang(hi) .eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.eyebrowIcon {
+  display: inline-flex;
+}
+
+.eyebrowIcon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.eyebrow_before {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-soft-border);
+  color: var(--color-primary);
+}
+
+.eyebrow_during {
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+}
+
+.eyebrow_after {
+  background: var(--color-surface);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+:root[data-contrast='high'] .eyebrow {
+  border-color: var(--color-border-strong);
+}
+
+.momentHeadingText {
+  font-size: var(--fs-xl);
+}
+
+/* Two classes so this wins over the shared Card styles regardless of load order. */
+.timeline .afterCard {
+  border-color: var(--color-danger);
+  border-inline-start-width: 6px;
+  background: linear-gradient(180deg, var(--color-danger-soft), var(--color-surface) 75%);
+}
+
+:root[data-contrast='high'] .timeline .afterCard {
+  background: var(--color-surface);
+}
+
+.demoBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: var(--control-border-width) dashed var(--color-accent);
+  background: var(--color-surface-sunken);
+}
+
+:root[data-contrast='high'] .demoBox {
+  border-color: var(--color-border-strong);
+}
+
+.demoHint {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.demoTag {
+  display: inline-block;
+  margin-inline-end: var(--space-1);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+  border: var(--border-width) solid var(--color-accent);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+:lang(hi) .demoTag {
+  letter-spacing: 0;
+}
+
+:root[data-contrast='high'] .demoTag {
+  border-color: var(--color-border-strong);
+}
+
+/* ---------- More (quiet links) ---------- */
+
+.more {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.moreTitle {
+  font-size: var(--fs-lg);
+}
+
+.moreList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* rem-based minimum: two columns at normal size, one column as text grows. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  gap: var(--space-2);
+}
+
+.moreList li {
+  display: flex;
+}
+
+.moreLink {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+
+.moreLink:hover {
+  background: var(--color-primary-soft);
+}
+
+.moreIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--color-primary);
+  padding-top: 0.15em;
+}
+
+.moreIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.moreText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.moreLabel {
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: var(--link-decoration);
+  text-underline-offset: 0.18em;
+}
+
+.moreHint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}
+
+.reset {
+  align-self: flex-start;
+}

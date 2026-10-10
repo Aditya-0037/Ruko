@@ -1,0 +1,180 @@
+/* ---------- External link ---------- */
+.external {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  min-height: var(--target-min);
+  padding-block: var(--space-2);
+  font-weight: 700;
+}
+
+.externalIcon {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+/* Long web addresses may break at 200% text instead of overflowing. */
+.site {
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Section kicker ---------- */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: calc(-1 * var(--space-3));
+  color: var(--color-caution-text);
+  font-size: var(--fs-sm);
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.kicker svg {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+/* ---------- Save status ---------- */
+.save {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.save svg {
+  flex-shrink: 0;
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.1em;
+}
+
+.saved {
+  color: var(--color-success);
+}
+
+/* ---------- Big checkbox ---------- */
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0;
+  border: var(--control-border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+/* The tick: drawn with borders so it inherits high contrast colours. */
+.checkbox::before {
+  content: '';
+  width: 0.55rem;
+  height: 1.05rem;
+  margin-top: -0.2rem;
+  border: solid var(--color-on-primary);
+  border-width: 0 0.22rem 0.22rem 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.checkbox:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox:checked::before {
+  transform: rotate(45deg) scale(1);
+}
+
+.checkbox:hover {
+  border-color: var(--color-primary);
+}
+
+/* Windows high contrast / forced colours: let the system draw a real checkbox. */
+@media (forced-colors: active) {
+  .checkbox {
+    appearance: auto;
+    -webkit-appearance: auto;
+  }
+
+  .checkbox::before {
+    display: none;
+  }
+}
+
+.checkRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.checkRowOn {
+  border-color: var(--color-primary-soft-border);
+  background: var(--color-primary-soft);
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--target-min);
+  cursor: pointer;
+}
+
+.checkText {
+  font-weight: 650;
+}
+
+.checkHint {
+  padding-inline-start: calc(2.25rem + var(--space-3));
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* ---------- Large text: keep buttons readable ----------
+ * A container measured in em reacts to the text size: at 100% a phone column is about 18em
+ * wide, at 200% about 9em. When it gets narrow, buttons inside give their padding back to the
+ * words and let the icon wrap, so words never break mid-way. */
+.fit {
+  container-type: inline-size;
+}
+
+@container (max-width: 15em) {
+  .fit :is(a, button):not(.external) {
+    flex-wrap: wrap;
+    padding-inline: var(--space-3);
+  }
+
+  /* Checkbox lists are containers too: a smaller box leaves the words room to wrap whole. */
+  .checkbox {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .checkbox::before {
+    width: 0.4rem;
+    height: 0.8rem;
+    border-width: 0 0.18rem 0.18rem 0;
+  }
+
+  .checkHint {
+    padding-inline-start: 0;
+  }
+}

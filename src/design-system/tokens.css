@@ -141,6 +141,7 @@
   --color-primary-soft: var(--white);
   --color-primary-soft-border: var(--black);
   --color-highlight: var(--marigold-300);
+  --color-accent: var(--black);
   --color-danger: var(--red-800);
   --color-danger-hover: var(--black);
   --color-danger-soft: var(--white);

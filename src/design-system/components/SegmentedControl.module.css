@@ -16,7 +16,7 @@
   flex-wrap: wrap;
   gap: var(--space-1);
   padding: var(--space-1);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-lg);
   background: var(--color-surface-sunken);
   border: var(--border-width) solid var(--color-border);
 }
@@ -39,8 +39,8 @@
   justify-content: center;
   gap: var(--space-1);
   min-height: var(--target-min);
-  padding: 0 var(--space-3);
-  border-radius: var(--radius-pill);
+  padding: 0 min(var(--space-3), 14px);
+  border-radius: var(--radius-md);
   font-weight: 700;
   cursor: pointer;
   border: var(--control-border-width) solid transparent;

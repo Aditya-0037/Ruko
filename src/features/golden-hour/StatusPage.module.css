@@ -1,0 +1,286 @@
+.smallTitle {
+  font-size: var(--fs-lg);
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.notReported {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* ---------- Vertical stepper ---------- */
+.where {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stepper {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  --node: 2.75rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--node) minmax(0, 1fr);
+  column-gap: var(--space-3);
+  padding-bottom: var(--space-5);
+}
+
+/* The line to the next step: solid once passed, dashed ahead. Shape, not just colour. */
+.item::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--node) + var(--space-1));
+  bottom: var(--space-1);
+  inset-inline-start: calc(var(--node) / 2 - 2px);
+  width: 4px;
+  border-radius: var(--radius-pill);
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-border-strong) 0 0.4rem,
+    transparent 0.4rem 0.75rem
+  );
+}
+
+.item.done::before {
+  background: var(--color-primary);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.item:last-child::before {
+  display: none;
+}
+
+.row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--node) minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--space-3);
+  min-height: var(--target-min);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.row:has(.input:focus-visible) {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.node {
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  border: var(--control-border-width) dashed var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  transition:
+    background-color var(--dur-med) var(--ease-standard),
+    border-color var(--dur-med) var(--ease-standard),
+    transform var(--dur-med) var(--ease-spring);
+}
+
+.node svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.nodeNumber {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.row:hover .node {
+  border-color: var(--color-primary);
+}
+
+.done .node {
+  border-style: solid;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.current .node {
+  border: 3px solid var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 5px var(--color-primary-soft);
+  transform: scale(1.06);
+}
+
+:root[data-contrast='high'] .current .node {
+  box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-text);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  padding-block: var(--space-1);
+}
+
+.title {
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  line-height: var(--lh-tight);
+}
+
+:root[lang='hi'] .title {
+  line-height: 1.45;
+}
+
+.current .title {
+  font-weight: 800;
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.state svg {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.done .state {
+  color: var(--color-success);
+}
+
+.current .state {
+  color: var(--color-primary);
+}
+
+/* ---------- Details ---------- */
+.panel,
+.more {
+  grid-column: 2;
+  margin-top: var(--space-2);
+}
+
+.panel {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: var(--control-border-width) solid var(--color-primary-soft-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.chevron {
+  flex-shrink: 0;
+  width: 1.2em;
+  height: 1.2em;
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+
+.more[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.moreBody {
+  padding: var(--space-3) 0 var(--space-1);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.detail dt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-size: var(--fs-sm);
+  font-weight: 800;
+}
+
+.detail dt svg {
+  flex-shrink: 0;
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.detail dd {
+  margin: 0;
+}
+
+/* ---------- Links ---------- */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ---------- Large text (the list is an em-sized container, see ui.module.css) ----------
+ * Smaller nodes and full-width explanations leave room for long words like "registered". */
+@container (max-width: 15em) {
+  .item {
+    --node: 2rem;
+  }
+
+  .title {
+    font-size: var(--fs-md);
+  }
+
+  .panel,
+  .more {
+    grid-column: 1 / -1;
+  }
+
+  .panel {
+    padding: var(--space-3);
+  }
+}

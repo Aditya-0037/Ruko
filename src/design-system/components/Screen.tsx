@@ -75,7 +75,9 @@ export function Screen({
           <div className={styles.start}>{backButton}</div>
           <Link to="/" className={styles.brand} aria-label={`${t('app.name')} — ${t('common.home')}`}>
             <RukoMark className={styles.mark} />
-            <span aria-hidden="true">{t('app.name')}</span>
+            <span className={styles.brandWord} aria-hidden="true">
+              {t('app.name')}
+            </span>
           </Link>
           <div className={styles.end}>
             {showHelp && (
@@ -99,7 +101,7 @@ export function Screen({
         {children}
       </main>
       {footer && (
-        <div className={`${styles.footer} no-print`}>
+        <div className={`${styles.footer} no-print`} role="region" aria-label={t('shell.pageActions')}>
           <div className={styles.footerInner}>{footer}</div>
         </div>
       )}
