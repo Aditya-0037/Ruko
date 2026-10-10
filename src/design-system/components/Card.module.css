@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.sunken {
+  background: var(--color-surface-sunken);
+  box-shadow: none;
+}
+
+.primary {
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary-soft-border);
+  box-shadow: none;
+}
+
+.compact {
+  padding: var(--space-4);
+  gap: var(--space-2);
+}

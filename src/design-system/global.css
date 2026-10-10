@@ -1,0 +1,191 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* 18px at 100%; Adapt to me scales everything (rem) up to 200%. */
+  font-size: calc(112.5% * var(--text-scale));
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Sticky top bar must never hide focused elements (WCAG 2.4.11). */
+  scroll-padding-top: 6rem;
+  scroll-padding-bottom: 6rem;
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
+}
+
+:lang(hi) {
+  font-family: var(--font-hindi);
+  /* Devanagari needs extra line height for matras. */
+  line-height: 1.65;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: var(--lh-tight);
+  font-weight: 750;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+}
+
+h2 {
+  font-size: var(--fs-xl);
+}
+
+h3 {
+  font-size: var(--fs-lg);
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding-inline-start: 1.25em;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: var(--link-decoration);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.08em;
+}
+
+/* One focus style everywhere: thick, offset, high contrast. */
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+::selection {
+  background: var(--color-highlight);
+  color: var(--color-on-highlight);
+}
+
+/* Easy Read: more air, shorter lines. */
+:root[data-easy-read='true'] body {
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  word-spacing: 0.06em;
+}
+
+:root[data-easy-read='true'] p,
+:root[data-easy-read='true'] li {
+  max-width: 34ch;
+}
+
+/* ---------- Utilities ---------- */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.stack-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stack-lg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.lead {
+  font-size: var(--fs-lg);
+  line-height: 1.4;
+}
+
+/* View Transitions: a gentle cross-fade + rise between screens. */
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion='reduce'])::view-transition-old(root) {
+    animation: var(--dur-med) var(--ease-standard) both ruko-fade-out;
+  }
+
+  :root:not([data-motion='reduce'])::view-transition-new(root) {
+    animation: var(--dur-slow) var(--ease-standard) both ruko-rise-in;
+  }
+}
+
+@keyframes ruko-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ruko-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

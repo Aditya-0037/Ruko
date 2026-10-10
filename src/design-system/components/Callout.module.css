@@ -1,0 +1,69 @@
+.callout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid transparent;
+  border-inline-start-width: 6px;
+}
+
+.icon {
+  display: inline-flex;
+  padding-top: 0.15em;
+}
+
+.icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--fs-lg);
+  font-weight: 750;
+  line-height: var(--lh-tight);
+}
+
+.info {
+  background: var(--color-info-soft);
+  border-color: var(--color-focus);
+}
+
+.info .icon {
+  color: var(--color-focus);
+}
+
+.caution {
+  background: var(--color-caution-bg);
+  border-color: var(--color-accent);
+}
+
+.caution .icon {
+  color: var(--color-caution-text);
+}
+
+.danger {
+  background: var(--color-danger-soft);
+  border-color: var(--color-danger);
+}
+
+.danger .icon {
+  color: var(--color-danger);
+}
+
+.success {
+  background: var(--color-success-soft);
+  border-color: var(--color-success);
+}
+
+.success .icon {
+  color: var(--color-success);
+}

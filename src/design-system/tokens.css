@@ -1,0 +1,175 @@
+/*
+ * Ruko design tokens — two layers.
+ *   Global tokens: raw palette and scales. Never used directly by components.
+ *   Alias tokens:  meaning ("--color-primary"). Components use only these.
+ * Three theme inputs: base (warm paper), accent (trust teal), contrast (standard | high).
+ *
+ * Measured contrast (WCAG 2.x relative luminance):
+ *   ink-900 #1B1A2E on paper #FFFBF5 ............ 16.4:1  body text
+ *   ink-600 #4A4860 on paper #FFFBF5 ............  8.6:1  muted text
+ *   white on teal-700 #0B6E69 ...................  6.1:1  primary button
+ *   white on red-700 #B3261E ....................  6.6:1  danger button
+ *   white on green-700 #1E6B3A ..................  6.6:1  success
+ *   ink-900 on marigold-300 #FBD38D .............  11.7:1 highlight
+ *   ink-900 on amber-50 #FFF1D6 .................  15.2:1 caution callout
+ *   stone-600 #7A7468 border on paper ...........  4.5:1  input boundary (needs 3:1)
+ *   blue-600 #1F4FD1 focus ring on paper ........  6.6:1  focus indicator (needs 3:1)
+ */
+
+:root {
+  /* ---------- Global: palette ---------- */
+  --paper-50: #fffbf5;
+  --white: #ffffff;
+  --black: #000000;
+  --ink-900: #1b1a2e;
+  --ink-700: #34324a;
+  --ink-600: #4a4860;
+  --stone-200: #ece6dc;
+  --stone-300: #dcd4c7;
+  --stone-600: #7a7468;
+  --teal-50: #e6f4f2;
+  --teal-100: #c8e8e4;
+  --teal-700: #0b6e69;
+  --teal-800: #08524e;
+  --teal-900: #063c39;
+  --marigold-300: #fbd38d;
+  --marigold-400: #f2a93b;
+  --amber-50: #fff1d6;
+  --amber-700: #8a5300;
+  --red-50: #fdecea;
+  --red-700: #b3261e;
+  --red-800: #8c1d17;
+  --green-50: #e8f5ec;
+  --green-700: #1e6b3a;
+  --blue-50: #eaf0ff;
+  --blue-600: #1f4fd1;
+
+  /* ---------- Global: scales ---------- */
+  --text-scale: 1; /* set by Adapt to me: 1 → 2 */
+
+  --fs-sm: 0.889rem; /* 16px at 100% */
+  --fs-md: 1rem; /* 18px */
+  --fs-lg: 1.222rem; /* 22px */
+  --fs-xl: 1.556rem; /* 28px */
+  --fs-2xl: 2rem; /* 36px */
+  --fs-3xl: 2.444rem; /* 44px */
+
+  --lh-tight: 1.2;
+  --lh-body: 1.5;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  --target-min: 48px;
+  --content-max: 30rem; /* readable phone-width column */
+
+  --shadow-1: 0 1px 2px rgb(27 26 46 / 0.08), 0 2px 8px rgb(27 26 46 / 0.06);
+  --shadow-2: 0 4px 12px rgb(27 26 46 / 0.12), 0 12px 32px rgb(27 26 46 / 0.1);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur-med: 240ms;
+  --dur-slow: 420ms;
+
+  --font-sans: 'Noto Sans Variable', 'Noto Sans Devanagari Variable', system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-hindi: 'Noto Sans Devanagari Variable', 'Noto Sans Variable', system-ui, sans-serif;
+
+  /* ---------- Alias: colour meaning ---------- */
+  --color-bg: var(--paper-50);
+  --color-surface: var(--white);
+  --color-surface-sunken: var(--stone-200);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-600);
+  --color-border: var(--stone-300); /* decorative only */
+  --color-border-strong: var(--stone-600); /* input & control boundaries (≥3:1) */
+
+  --color-primary: var(--teal-700);
+  --color-primary-hover: var(--teal-800);
+  --color-primary-pressed: var(--teal-900);
+  --color-on-primary: var(--white);
+  --color-primary-soft: var(--teal-50);
+  --color-primary-soft-border: var(--teal-100);
+
+  --color-accent: var(--marigold-400);
+  --color-highlight: var(--marigold-300);
+  --color-on-highlight: var(--ink-900);
+
+  --color-danger: var(--red-700);
+  --color-danger-hover: var(--red-800);
+  --color-on-danger: var(--white);
+  --color-danger-soft: var(--red-50);
+
+  --color-caution-bg: var(--amber-50);
+  --color-caution-text: var(--amber-700);
+  --color-success: var(--green-700);
+  --color-success-soft: var(--green-50);
+  --color-info-soft: var(--blue-50);
+
+  --color-focus: var(--blue-600);
+  --focus-width: 3px;
+  --border-width: 1px;
+  --control-border-width: 2px;
+
+  --link-decoration: underline;
+}
+
+/* ---------- Contrast input: high ---------- */
+:root[data-contrast='high'] {
+  --color-bg: var(--white);
+  --color-surface: var(--white);
+  --color-surface-sunken: var(--white);
+  --color-text: var(--black);
+  --color-text-muted: var(--black);
+  --color-border: var(--black);
+  --color-border-strong: var(--black);
+  --color-primary: var(--teal-900);
+  --color-primary-hover: var(--black);
+  --color-primary-pressed: var(--black);
+  --color-primary-soft: var(--white);
+  --color-primary-soft-border: var(--black);
+  --color-highlight: var(--marigold-300);
+  --color-danger: var(--red-800);
+  --color-danger-hover: var(--black);
+  --color-danger-soft: var(--white);
+  --color-caution-bg: var(--white);
+  --color-caution-text: var(--black);
+  --color-success: #0f4d27;
+  --color-success-soft: var(--white);
+  --color-info-soft: var(--white);
+  --color-focus: var(--black);
+  --focus-width: 4px;
+  --border-width: 2px;
+  --control-border-width: 3px;
+  --shadow-1: none;
+  --shadow-2: 0 0 0 2px var(--black);
+}
+
+/* ---------- Motion input ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) {
+    --dur-fast: 0.01ms;
+    --dur-med: 0.01ms;
+    --dur-slow: 0.01ms;
+    --ease-spring: linear;
+  }
+}
+
+:root[data-motion='reduce'] {
+  --dur-fast: 0.01ms;
+  --dur-med: 0.01ms;
+  --dur-slow: 0.01ms;
+  --ease-spring: linear;
+}

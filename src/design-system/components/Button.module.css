@@ -1,0 +1,105 @@
+.button {
+  --btn-bg: var(--color-surface);
+  --btn-fg: var(--color-text);
+  --btn-border: var(--color-border-strong);
+  --btn-bg-hover: var(--color-surface-sunken);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: max(var(--target-min), 3rem);
+  min-width: var(--target-min);
+  padding: var(--space-2) var(--space-5);
+  border: var(--control-border-width) solid var(--btn-border);
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-spring),
+    box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+.button:hover {
+  background: var(--btn-bg-hover);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.button[aria-disabled='true'],
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.primary {
+  --btn-bg: var(--color-primary);
+  --btn-fg: var(--color-on-primary);
+  --btn-border: var(--color-primary);
+  --btn-bg-hover: var(--color-primary-hover);
+  box-shadow: var(--shadow-1);
+}
+
+.danger {
+  --btn-bg: var(--color-danger);
+  --btn-fg: var(--color-on-danger);
+  --btn-border: var(--color-danger);
+  --btn-bg-hover: var(--color-danger-hover);
+  box-shadow: var(--shadow-1);
+}
+
+.success {
+  --btn-bg: var(--color-success);
+  --btn-fg: var(--color-on-primary);
+  --btn-border: var(--color-success);
+  --btn-bg-hover: var(--color-primary-pressed);
+}
+
+.secondary {
+  --btn-bg: var(--color-surface);
+  --btn-fg: var(--color-primary);
+  --btn-border: var(--color-primary);
+  --btn-bg-hover: var(--color-primary-soft);
+}
+
+.quiet {
+  --btn-bg: transparent;
+  --btn-fg: var(--color-primary);
+  --btn-border: transparent;
+  --btn-bg-hover: var(--color-primary-soft);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.lg {
+  min-height: max(56px, 3.5rem);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--fs-lg);
+}
+
+.full {
+  display: flex;
+  width: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 1.25em;
+  height: 1.25em;
+}

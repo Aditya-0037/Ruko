@@ -1,0 +1,107 @@
+.wrap {
+  display: grid;
+  place-items: center;
+  padding: var(--space-4) 0;
+}
+
+.button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(15rem, 70vw);
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--teal-700), var(--teal-900) 75%);
+  color: var(--white);
+  box-shadow:
+    0 0 0 10px var(--color-primary-soft),
+    0 0 0 14px var(--color-primary-soft-border),
+    var(--shadow-2);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+:root[data-contrast='high'] .button {
+  background: var(--black);
+  box-shadow: 0 0 0 6px var(--white), 0 0 0 10px var(--black);
+}
+
+.button:hover {
+  transform: scale(1.02);
+}
+
+.button:active {
+  transform: scale(0.96);
+}
+
+.button:focus-visible {
+  outline-offset: 18px;
+  border-radius: 50%;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.sub {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: 1.3;
+  max-width: 11ch;
+}
+
+.icon svg {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+/* A slow "breathing" ring invites a tap without alarming. Off under reduced motion. */
+.button::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 3px solid var(--color-accent);
+  opacity: 0;
+  animation: breathe 3.2s var(--ease-standard) infinite;
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.7;
+  }
+
+  70% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) .button::after {
+    animation: none;
+  }
+}
+
+:root[data-motion='reduce'] .button::after {
+  animation: none;
+}
